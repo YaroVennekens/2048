@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from 'react';
-import GameControls from '@/game/GameControls.tsx';
+import React, {FunctionComponent} from 'react'
+import GameControls from '@/game/GameControls.tsx'
+
 
 interface HeaderProps {
     onNewGame: () => void;
