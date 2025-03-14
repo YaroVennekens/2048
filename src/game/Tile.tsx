@@ -36,8 +36,39 @@ const getTextColor = (value: TileValue): string => {
 
 const getFontSize = (value: TileValue): string => {
   if (!value) return "2.25rem";
-
   if (value < 100) return "2.25rem";
   if (value < 1000) return "1.875rem";
   return "1.5rem";
 };
+
+const Tile: FunctionComponent<TileProps> = ({ value, position, isNew = false, mergedFrom }) => {
+  if (!value) return null;
+
+  const positionStyle: React.CSSProperties = {
+    transform: `translate(calc(${position[0]} * (100% + 16px)), calc(${position[1]} * (100% + 16px)))`,
+    position: "absolute" as const,
+    width: "calc(25% - 12px)",
+    height: "calc(25% - 12px)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "0.375rem",
+    userSelect: "none",
+    backgroundColor: getBgColor(value),
+    color: getTextColor(value),
+    fontSize: getFontSize(value),
+    fontWeight: "bold",
+    transition: "transform 150ms",
+    animation: isNew ? "scaleIn 0.2s ease-in-out" :
+      mergedFrom ? "merge 0.2s ease-in-out" : "none"
+  };
+
+  return (
+    <div style={positionStyle}>
+      {value}
+    </div>
+  );
+};
+
+export default Tile;
+
