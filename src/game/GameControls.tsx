@@ -42,7 +42,7 @@ interface GameControlsProps {
     gameWon: boolean;
 }
 
-const GameControls: React.FC<GameControlsProps> = ({ onNewGame, gameOver, gameWon }) => {
+const GameControls: FunctionComponent<GameControlsProps> = ({ onNewGame, gameOver, gameWon }) => {
     return (
       <div className="flex flex-col w-full items-center mb-6 relative">
           <Button onClick={onNewGame}>New Game</Button>
