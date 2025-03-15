@@ -44,7 +44,8 @@ interface GameControlsProps {
 
 const GameControls: FunctionComponent<GameControlsProps> = ({ onNewGame, gameOver, gameWon }) => {
     return (
-      <div className="flex flex-col w-full items-center mb-6 relative">
+      <div className="flex flex-col w-full items-center mb-6 relative ">
+
           <Button onClick={onNewGame}>New Game</Button>
           {(gameOver || gameWon) && (
             <Overlay message={gameWon ? "You win!" : "Game over!"} onRetry={onNewGame} />

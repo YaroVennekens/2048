@@ -137,6 +137,8 @@ export function use2048Game() {
   }, [gameState, addRandomTile]);
 
   useEffect(() => {
+    const moveSound = new Audio("/move.wav");
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (["ArrowUp", "ArrowRight", "ArrowDown", "ArrowLeft", "w", "d", "s", "a"].includes(event.key)) {
         event.preventDefault();
@@ -163,6 +165,9 @@ export function use2048Game() {
             return;
         }
 
+        moveSound.currentTime = 0;
+        moveSound.play().catch(err => console.warn("Audio playback failed", err));
+
         moveTiles(direction);
       }
     };
@@ -172,7 +177,6 @@ export function use2048Game() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [moveTiles]);
-
   const handleTouchStart = (e: React.TouchEvent) => {
     if (gameState.over || gameState.won) return;
 
