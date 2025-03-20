@@ -37,16 +37,21 @@ const Overlay: FunctionComponent<OverlayProps> = ({ message, onRetry }) => {
 };
 
 interface GameControlsProps {
-    onNewGame: () => void;
     gameOver: boolean;
     gameWon: boolean;
 }
 
+
+
 const GameControls: FunctionComponent<GameControlsProps> = ({ onNewGame, gameOver, gameWon }) => {
+
+  const restart = () => {
+    location.reload();
+  }
     return (
       <div className="flex flex-col w-full items-center mb-6 relative ">
 
-          <Button onClick={onNewGame}>New Game</Button>
+          <Button onClick={restart}>New Game</Button>
           {(gameOver || gameWon) && (
             <Overlay message={gameWon ? "You win!" : "Game over!"} onRetry={onNewGame} />
           )}

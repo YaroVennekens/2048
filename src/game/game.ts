@@ -8,6 +8,7 @@ import { TileType } from "@/interface/TileType";
 import {Direction} from '@/interface/Direction.ts'
 
 export function use2048Game() {
+
   const [gameState, setGameState] = useState<GameState>({ ...initialGameState });
   const [startX, setStartX] = useState<number | null>(null);
   const [startY, setStartY] = useState<number | null>(null);
@@ -138,7 +139,6 @@ export function use2048Game() {
 
   useEffect(() => {
     const moveSound = new Audio("/move.wav");
-
     const handleKeyDown = (event: KeyboardEvent) => {
       if (["ArrowUp", "ArrowRight", "ArrowDown", "ArrowLeft", "w", "d", "s", "a"].includes(event.key)) {
         event.preventDefault();
@@ -164,10 +164,8 @@ export function use2048Game() {
           default:
             return;
         }
-
         moveSound.currentTime = 0;
         moveSound.play().catch(err => console.warn("Audio playback failed", err));
-
         moveTiles(direction);
       }
     };
@@ -179,7 +177,6 @@ export function use2048Game() {
   }, [moveTiles]);
   const handleTouchStart = (e: React.TouchEvent) => {
     if (gameState.over || gameState.won) return;
-
     const touch = e.touches[0];
     setStartX(touch.clientX);
     setStartY(touch.clientY);
